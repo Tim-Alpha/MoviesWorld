@@ -1,9 +1,14 @@
 import {View, Text, StyleSheet} from 'react-native';
-import React from 'react';
-import {TextInput} from 'react-native-gesture-handler';
+import React, {useState} from 'react';
+import {ScrollView, TextInput} from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import HBCards from '../Components/HBCards';
+import HSCards from './HSCard';
+import Data from '../Data/DataSource';
 
 const All = () => {
+  const [data, setData] = useState(Data);
+
   return (
     <View style={styles.mainContainer}>
       <View style={styles.inputContainer}>
@@ -11,6 +16,12 @@ const All = () => {
         <TextInput style={styles.input} placeholder="what's in mind" />
         <Icon style={styles.iconSearch} name="search" size={40} color="#000" />
       </View>
+      <ScrollView horizontal={false}>
+        <HBCards />
+        <HSCards headTitle="South Movie" Data={data} />
+        <HSCards headTitle="Bollywood Movie" Data={data} />
+        <HSCards headTitle="Hollywood Movie" Data={data} />
+      </ScrollView>
     </View>
   );
 };
@@ -41,7 +52,7 @@ const styles = StyleSheet.create({
   iconSearch: {
     backgroundColor: '#ddd231',
     marginStart: 2,
-    borderEndRadius: 6,
+    borderRadius: 6,
     paddingHorizontal: 5,
   },
   input: {
